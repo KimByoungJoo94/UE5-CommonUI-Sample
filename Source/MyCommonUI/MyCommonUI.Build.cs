@@ -8,7 +8,7 @@ public class MyCommonUI : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
-		PublicDependencyModuleNames.AddRange(new string[] {
+        PublicDependencyModuleNames.AddRange(new string[] {
 			"Core",
 			"CoreUObject",
 			"Engine",
@@ -18,8 +18,9 @@ public class MyCommonUI : ModuleRules
 			"StateTreeModule",
 			"GameplayStateTreeModule",
 			"UMG",
-			"Slate"
-		});
+			"Slate",
+            "CommonUI"
+        });
 
 		PrivateDependencyModuleNames.AddRange(new string[] { });
 

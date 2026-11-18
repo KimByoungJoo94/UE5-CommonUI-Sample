@@ -6,8 +6,22 @@
 #include "GameFramework/PlayerController.h"
 #include "MyCommonUIPlayerController.generated.h"
 
+class UInputAction;
 class UInputMappingContext;
+class UMCRootLayout;
 class UUserWidget;
+
+/* MC 기본 템플릿과 구분 */
+USTRUCT()
+struct FMCControllerInputData
+{
+	GENERATED_BODY()
+
+public:
+	UPROPERTY(EditDefaultsOnly)
+	TObjectPtr<UInputAction> OpenSettingAction;
+};
+/* ~MC */
 
 /**
  *  Basic PlayerController class for a third person game
@@ -49,4 +63,20 @@ protected:
 	/** Returns true if the player should use UMG touch controls */
 	bool ShouldUseTouchControls() const;
 
+	/* MC 기본 템플릿과 구분 */
+private:
+	void InitializeRootLayout();
+	
+	void OnOpenSettingActionStarted();
+
+private:
+	UPROPERTY(Transient)
+	TObjectPtr<UMCRootLayout> RootLayout;
+
+	UPROPERTY(EditDefaultsOnly, Category = "MyCommonUI")
+	TSubclassOf<UMCRootLayout> RootLayoutClass;
+
+	UPROPERTY(EditDefaultsOnly, Category = "MyCommonUI")
+	FMCControllerInputData ControllerInputData;	
+	/* ~MC */
 };

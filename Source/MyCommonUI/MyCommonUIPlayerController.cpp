@@ -2,11 +2,13 @@
 
 
 #include "MyCommonUIPlayerController.h"
+#include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "Engine/LocalPlayer.h"
 #include "InputMappingContext.h"
 #include "Blueprint/UserWidget.h"
 #include "MyCommonUI.h"
+#include "UI/MCRootLayout.h"
 #include "Widgets/Input/SVirtualJoystick.h"
 
 void AMyCommonUIPlayerController::BeginPlay()
@@ -31,6 +33,10 @@ void AMyCommonUIPlayerController::BeginPlay()
 		}
 
 	}
+
+	/* MC 기본 템플릿과 구분 */
+	InitializeRootLayout();
+	/* ~MC */
 }
 
 void AMyCommonUIPlayerController::SetupInputComponent()
@@ -57,6 +63,13 @@ void AMyCommonUIPlayerController::SetupInputComponent()
 				}
 			}
 		}
+
+		/* MC 기본 템플릿과 구분 */
+		if (UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(InputComponent))
+		{
+			EnhancedInputComponent->BindAction(ControllerInputData.OpenSettingAction, ETriggerEvent::Started, this, &ThisClass::OnOpenSettingActionStarted);
+		}
+		/* ~MC */
 	}
 }
 
@@ -65,3 +78,25 @@ bool AMyCommonUIPlayerController::ShouldUseTouchControls() const
 	// are we on a mobile platform? Should we force touch?
 	return SVirtualJoystick::ShouldDisplayTouchInterface() || bForceTouchControls;
 }
+
+/* MC 기본 템플릿과 구분 */
+void AMyCommonUIPlayerController::InitializeRootLayout()
+{
+	if (IsLocalPlayerController() && RootLayoutClass.Get())
+	{
+		RootLayout = CreateWidget<UMCRootLayout>(this, RootLayoutClass);
+		if (RootLayout)
+		{
+			RootLayout->AddToPlayerScreen();
+		}
+	}
+}
+
+void AMyCommonUIPlayerController::OnOpenSettingActionStarted()
+{
+	if (RootLayout)
+	{
+		RootLayout->OpenSettingsScreen();
+	}
+}
+/* ~MC */
