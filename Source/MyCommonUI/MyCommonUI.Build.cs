@@ -22,7 +22,11 @@ public class MyCommonUI : ModuleRules
             "CommonUI"
         });
 
-		PrivateDependencyModuleNames.AddRange(new string[] { });
+		PrivateDependencyModuleNames.AddRange(new string[] { "DeveloperSettings", "GameplayTags" });
+		if (Target.bBuildEditor)
+		{
+			PrivateDependencyModuleNames.Add("Settings");
+		}
 
 		PublicIncludePaths.AddRange(new string[] {
 			"MyCommonUI",
