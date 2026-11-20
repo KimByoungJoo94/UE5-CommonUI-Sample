@@ -1,5 +1,5 @@
 #include "UI/Screen/MCScreenWidget.h"
-#include "CommonAnimatedSwitcher.h"
+#include "CommonActivatableWidgetSwitcher.h"
 #include "CommonButtonBase.h"
 #include "CommonInputModeTypes.h"
 #include "Components/HorizontalBox.h"
@@ -59,14 +59,14 @@ void UMCScreenWidget::NativeConstruct()
 	TabButtonGroup->SetSelectionRequired(true);
 
 	const UMCGameConfig* GameConfig = GetDefault<UMCGameConfig>();
-	const FDataTableRowHandle& PreviousTabAction = GameConfig->GetPreviousTabAction();
+	const FDataTableRowHandle& PreviousTabAction = GameConfig->PreviousTabAction;
 	if (PreviousTabAction.IsNull() == false)
 	{
 		PreviousTabActionHandle = RegisterUIActionBinding(
 			FBindUIActionArgs(PreviousTabAction, false, FSimpleDelegate::CreateUObject(this, &ThisClass::OnPreviousTabAction)));
 	}
 
-	const FDataTableRowHandle& NextTabAction = GameConfig->GetNextTabAction();
+	const FDataTableRowHandle& NextTabAction = GameConfig->NextTabAction;
 	if (NextTabAction.IsNull() == false)
 	{
 		NextTabActionHandle = RegisterUIActionBinding(

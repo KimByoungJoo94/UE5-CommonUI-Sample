@@ -3,7 +3,7 @@
 #include "CommonActivatableWidget.h"
 #include "MCScreenWidget.generated.h"
 
-class UCommonAnimatedSwitcher;
+class UCommonActivatableWidgetSwitcher;
 class UCommonButtonBase;
 class UCommonButtonGroupBase;
 class UHorizontalBox;
@@ -33,7 +33,7 @@ private:
 	TObjectPtr<UHorizontalBox> TabButtonContainer;
 
 	UPROPERTY(meta = (BindWidget))
-	TObjectPtr<UCommonAnimatedSwitcher> PanelSwitcher;
+	TObjectPtr<UCommonActivatableWidgetSwitcher> PanelSwitcher;
 
 	UPROPERTY(Transient)
 	TObjectPtr<UCommonButtonGroupBase> TabButtonGroup;
