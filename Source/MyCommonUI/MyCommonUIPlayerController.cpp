@@ -9,6 +9,7 @@
 #include "Blueprint/UserWidget.h"
 #include "MyCommonUI.h"
 #include "UI/MCRootLayout.h"
+#include "UserSettings/EnhancedInputUserSettings.h"
 #include "Widgets/Input/SVirtualJoystick.h"
 
 void AMyCommonUIPlayerController::BeginPlay()
@@ -80,6 +81,23 @@ bool AMyCommonUIPlayerController::ShouldUseTouchControls() const
 }
 
 /* MC 기본 템플릿과 구분 */
+void AMyCommonUIPlayerController::ReceivedPlayer()
+{
+	Super::ReceivedPlayer();
+
+	const UEnhancedInputLocalPlayerSubsystem* InputSubsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer());
+	if (UEnhancedInputUserSettings* UserSettings = InputSubsystem->GetUserSettings())
+	{
+		for (UInputMappingContext* CurrentContext : DefaultMappingContexts)
+		{
+			if (CurrentContext != nullptr)
+			{
+				UserSettings->RegisterInputMappingContext(CurrentContext);
+			}
+		}
+	}
+}
+
 void AMyCommonUIPlayerController::InitializeRootLayout()
 {
 	if (IsLocalPlayerController() && RootLayoutClass.Get())

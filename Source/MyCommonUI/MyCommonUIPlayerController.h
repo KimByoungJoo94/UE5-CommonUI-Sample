@@ -54,6 +54,7 @@ protected:
 	UPROPERTY(EditAnywhere, Config, Category = "Input|Touch Controls")
 	bool bForceTouchControls = false;
 
+protected:
 	/** Gameplay initialization */
 	virtual void BeginPlay() override;
 
@@ -64,6 +65,9 @@ protected:
 	bool ShouldUseTouchControls() const;
 
 	/* MC 기본 템플릿과 구분 */
+protected:
+	virtual void ReceivedPlayer() override;
+
 private:
 	void InitializeRootLayout();
 	

@@ -27,4 +27,7 @@ struct MYCOMMONUI_API FMCSettingTableRowData : public FTableRowBase
 
 	UPROPERTY(EditAnywhere, Category = "MyCommonUI")
 	int32 DisplayOrder = 0;
+
+	UPROPERTY(EditAnywhere, Category = "MyCommonUI", meta = (EditCondition = "Type == EMCSettingType::KeyboardMouse || Type == EMCSettingType::Gamepad", EditConditionHides))
+	FName InputMappingName;
 };

@@ -22,7 +22,13 @@ public class MyCommonUI : ModuleRules
             "CommonUI"
         });
 
-		PrivateDependencyModuleNames.AddRange(new string[] { "AssetRegistry", "DeveloperSettings", "GameplayTags", "SlateCore" });
+		PrivateDependencyModuleNames.AddRange(new string[] { 
+			"AssetRegistry", 
+			"DeveloperSettings", 
+			"GameplayTags", 
+			"SlateCore", 
+			"CommonInput" 
+		});
 
 		PublicIncludePaths.AddRange(new string[] {
 			"MyCommonUI",
